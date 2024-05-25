@@ -1,108 +1,93 @@
 *=$C000                ; Start of upper RAM area
 
     color    = $02
-    colorram = $FB
-    pos      = $FD
-    counters = $0334
-    temp     = $03FC
+    colorram = $fb
+    pos      = $fd
+    counters = $61
 
-    lda #$f8           ; Initialize pos to 1016
+    lda #$00           ; Initialize pos to 1024
     sta pos
-    lda #$03
+    lda #$04
     sta pos + 1
 
     lda #$03           ; Initialize color to 3 (cyan)
     sta color
 
-    ldy #$01           ; Start of rows draw loop
+    ldx #$01           ; Start of rows draw loop
 
 rowsloop
 
-    sty counters       ; Start lines draw loop
-    ldy #$01
+    stx counters       ; Start lines draw loop
+    ldx #$01
 
 linesloop
 
-    lda #$07           ; Increment pos by 7
-    sta temp
-    jsr incpos
+    stx counters + 1   ; Start squares draw loop
+    ldx #$01
 
-    sty counters + 1   ; Start squares draw loop
-    ldy #$01
-
-squaresloop
-
-    sty counters + 2   ; Start square draw loop
-    ldy #$01
-
-squareloop
-
-    lda #$01           ; Incremet pos by 1
-    sta temp
-    jsr incpos
-
-    ldx #$00           ; Write space to screen
-    lda #$a0
-    sta (pos,X)
+    ldy #$00           ; Index into screen/color RAM of current line
 
     clc
-    lda pos            ; Calculate next color RAM address
+    lda pos            ; Calculate color RAM address for current line
     sta colorram
     lda pos + 1
     adc #$d4
     sta colorram + 1
+
+squaresloop
+
+    stx counters + 2   ; Start square draw loop
+    ldx #$01
+
+squareloop
+
+    lda #$a0           ; Write space to screen
+    sta (pos),y
     lda color          ; Setting color
-    sta (colorram,X)
+    sta (colorram),y
+    iny;
 
-    iny                ; End of square draw loop
-    cpy #$05
+    inx                ; End of square draw loop
+    cpx #$05
     bne squareloop
-    ldy counters + 2
+    ldx counters + 2
 
     jsr switchcolor
 
-    iny                ; End of squares draw loop
-    cpy #$09
+    inx                ; End of squares draw loop
+    cpx #$09
     bne squaresloop
-    ldy counters + 1
+    ldx counters + 1
 
-    lda #$01           ; Increment pos by 1
-    sta temp
-    jsr incpos
+    clc                ; Increments value of pos by 40
+    lda pos            ; Adding 40 to low byte
+    adc #$28
+    sta pos
+    lda pos + 1        ; Adding carry to high byte
+    adc #$00
+    sta pos + 1
 
-    iny                ; End of lines draw loop
-    cpy #$04
+    inx                ; End of lines draw loop
+    cpx #$04
     bne linesloop
-    ldy counters
+    ldx counters
 
     jsr switchcolor
 
-    iny                ; End of rows draw loop
-    cpy #$09
+    inx                ; End of rows draw loop
+    cpx #$09
     bne rowsloop
 
     rts
 
 
-incpos
-    clc                ; Increments value of pos by the value of temp
-    lda pos            ; Adding temp to low byte
-    adc temp
-    sta pos
-    lda pos + 1        ; Adding carry to high byte
-    adc #$00
-    sta pos + 1
-    rts
-
-
 switchcolor
-    ldx color          ; Check current color
-    cpx #$00
+    lda color          ; Check current color
     bne setblack
-    ldx #$03           ; Set color to cyan
-    stx color
+    lda #$03           ; Set color to cyan
+    sta color
     rts
 setblack
-    ldx #$00           ; Set color to black
-    stx color
+    lda #$00           ; Set color to black
+    sta color
     rts

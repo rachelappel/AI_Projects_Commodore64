@@ -52,7 +52,9 @@ squareloop
     bne squareloop
     ldx counters + 2
 
-    jsr switchcolor
+    lda color          ; Switch square color
+    eor #$03
+    sta color
 
     inx                ; End of squares draw loop
     cpx #$09
@@ -72,22 +74,12 @@ squareloop
     bne linesloop
     ldx counters
 
-    jsr switchcolor
+    lda color          ; Switch square color
+    eor #$03
+    sta color
 
     inx                ; End of rows draw loop
     cpx #$09
     bne rowsloop
 
-    rts
-
-
-switchcolor
-    lda color          ; Check current color
-    bne setblack
-    lda #$03           ; Set color to cyan
-    sta color
-    rts
-setblack
-    lda #$00           ; Set color to black
-    sta color
     rts

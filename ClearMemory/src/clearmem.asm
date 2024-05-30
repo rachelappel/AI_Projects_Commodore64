@@ -23,14 +23,14 @@ clearbytes
 
 nextpage
 
-    ldy #$00           ; Increment page and reset page offset
-    inc start + 1
+    ldy #$00           ; Reset page offset
+    inc start + 1      ; and increment page
     jmp clearpage
 
 clearfinalpage
 
     sta (start),Y      ; Clear current byte
-    cpy end            ; if last byte of last page was cleared return
+    cpy end            ; If last byte of last page was cleared return
     beq return
     iny                ; Prepare next loop interation
     jmp clearfinalpage

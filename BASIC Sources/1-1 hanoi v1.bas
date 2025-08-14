@@ -1,0 +1,16 @@
+5 :::::::::::::::::::::::::::::::::::::
+10 REM TOWERS OF HANOI - VERSION 1
+20 REM WRITTEN BY TIMOTHY J. O'MALLEY
+30 REM COPYRIGHT 1984, TAB BOOKS INC.
+40 REM (WRITTEN FOR THE COMMODORE 64)
+45 ::::::::::::::::::::::::::::::::::::
+50 PRINT CHR$(147);
+60 INPUT "WHAT NUMBER OF DISKS";N:M=(1=(1 AND N))*2+1
+70 DIM K(N):FOR I=1 TO N:K(I)=1:NEXT
+80 A$="ABC":FOR L=1 TO 2^N-1:I=0
+90 D=-((L AND 2^I)=2^I)*(I+1):I=I+1:IF D=0 THEN 90
+100 T=M*(((1 AND D)=1)*2+1)
+110 F=K(D)-T:J=F-T*3*(F<1 OR F>3)
+120 PRINT "MOVE"L":"TAB(15)"FROM "MID$(A$,K(D),1)" TO ";
+130 PRINT MID$(A$,J,1):K(D)=J:NEXT
+135 :::::::::::::::::::::::::::::::::::

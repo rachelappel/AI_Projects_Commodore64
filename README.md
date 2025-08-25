@@ -20,5 +20,3 @@ This talk is based on the algorithms and code from the book [Artificial Intellig
 * Patterns in Numbers; Mathematical algorithms, Number theory
 * Patterns in Strings; String matching algorithms (KMP, Rabin-Karp)
 * A Word Processor; Text editing algorithms, Data structures for strings
-
-<img width="908" height="473" alt="image" src="https://github.com/user-attachments/assets/860fde8d-5631-43c7-bb6f-8ac831eaaa54" />

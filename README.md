@@ -20,3 +20,9 @@ This talk is based on the algorithms and code from the book [Artificial Intellig
 * Patterns in Numbers; Mathematical algorithms, Number theory
 * Patterns in Strings; String matching algorithms (KMP, Rabin-Karp)
 * A Word Processor; Text editing algorithms, Data structures for strings
+
+## Notes
+
+The assembly code was written to draw the chessboard fast, as it would take too long to wait for it for a presentation. 
+The code was cross-assembled  https://sourceforge.net/projects/acme-crossass/
+BASIC compilation https://marketplace.visualstudio.com/items?itemName=rosc.vs64

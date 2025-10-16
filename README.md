@@ -6,16 +6,16 @@ This talk is based on the algorithms and code from the book [Artificial Intellig
 
 ## What's in the book
 * The Towers of Hanoi; Recursive algorithm
-* The Knight's Tour; Backtracking, Depth-First Search (DFS)
-* The Game of Nim; Combinatorial game theory, Minimax algorithm
+* The Knight's Tour; Static path, precomputed data, expert system
+* The Game of Nim; Combinatorial game theory, Minimax-like algorithm
 * The Path through a Maze; Graph search algorithms (DFS, BFS), Backtracking
 * Cellular Automaton; Rule-based systems, Discrete dynamical systems
 * Training the Rat; Reinforcement learning, Trial and error
-* First Bootstrap Program; Self-hosting compilers, Recursive code loading
-* Second Bootstrap Program; Incremental compilation, Self-replication
+* First Bootstrap Program; Self modifying code
+* Second Bootstrap Program; Self modifying code
 * ELIZA-like Program; Pattern matching, Rule-based natural language processing
-* Perfect Logic; Symbolic logic, Theorem proving
-* Tic Tac Toe; Minimax algorithm, Game tree search
+* Perfect Logic; Symbolic logic, inference engine
+* Tic Tac Toe; Minimax-like algorithm
 * Five-in-a-Row Game; Minimax, Heuristic evaluation
 * Patterns in Numbers; Mathematical algorithms, Number theory
 * Patterns in Strings; String matching algorithms (KMP, Rabin-Karp)
